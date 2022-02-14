@@ -4,7 +4,7 @@ The general idea of the strategy consists of:
 
 1. Keep a set of possible answers.
 2. Score all words of this set using a weighted average of different criteria.
-3. Play the word with the highest score.
+3. Guess the word with the highest score.
 4. Based on game feedback, apply rules to filter the set of possible answers.
 5. Repeat these steps for each round until the end of the game.
 
@@ -22,7 +22,7 @@ An initial and naive strategy would probably be a player that filters the set of
 
 After discovering a correct position, the player insisted on winning in the next round. However, note that repeating a green character does not give additional information about the answer.
 
-After choosing "chill," the player could have chosen a word that maximized the number of different letters. If instead of "spill," the player had chosen "kaput," it would have discovered the answer in a single round. Why "kaput"? Although "kaput" is clearly not the answer, the only possible words were {"skill," "spill," "still," "swill"}, and "kaput" contains the letters 'k', 'p' and 't.'
+After choosing "night," the player could have chosen a word that maximized the number of different letters. If instead of "right," the player had chosen "blend" or "fresh," it would have be the answer in a single round. Why? Even knowing that "blend" and "flesh" are cleary not the answer, all the letters of both words are the first characters of set of the possible answers {'bight', 'dight', 'eight', 'fight', 'hight', 'light', 'might', 'night', 'right', 'sight', 'tight', 'wight'}.
 
 This example suggests the existence of different states. Each state has different strategies based on different goals.
 
@@ -44,7 +44,7 @@ Before discussing the game states, it is necessary to describe all rules the pla
 
 As we saw earlier, sometimes we will play to win, and other times we will play to discover unseen characters. Besides, sometimes we will score just the words in the set of the possible answers, and other times we will score all the words.
 
-These different goals and approaches change based on the current state, which is set based on some specific conditions.
+These different goals and approaches change based on the current state, set based on some specific conditions.
 
 **Note:** Because of some optimizations and implementation details, the [player.py](player.py) did not explicitly reference the game states. However, they are conceptually fundamental to the strategy.
 
@@ -54,7 +54,7 @@ These different goals and approaches change based on the current state, which is
     <img src="meta/explore_state_example.png">
 </div>
 
-In this state, the goal is to reduce the size of the set of possible answers. To achieve that, the player will choose a word that maximizes the number of unseen characters, even if that word is not the correct answer. An unseen character is a character that we do not know if it is gray, yellow, or green.
+In this state, the goal is to decrease the size of the set of possible answers. To achieve that, the player will choose a word that maximizes the number of unseen characters, even if that word is not the correct answer. An unseen character is a character that we do not know if it is gray, yellow, or green.
 
 Note that the "gray character optimization" plays an essential role in this state. The player should avoid exploring a character if it does not appear on the set of possible answers.
 
