@@ -14,7 +14,7 @@ Once the general idea is understood, we need to explore the details of the strat
 
 ## Intuition
 
-An initial and naive strategy would probably be a player that filters the set of possible answers using the rules and then chooses the word with the most frequent characters. However, that strategy would inevitably make the following mistake:
+An initial and naive strategy would probably be a player that filters the set of possible answers using the game rules and then chooses the word with the most frequent characters. However, that strategy would inevitably make the following mistake:
 
 <div align="center">
     <img src="meta/case1_en.png">
@@ -22,7 +22,7 @@ An initial and naive strategy would probably be a player that filters the set of
 
 After discovering a correct position, the player insisted on winning in the next round. However, note that repeating a green character does not give additional information about the answer.
 
-After choosing "night," the player could have chosen a word that maximized the number of different letters. If instead of "right," the player had chosen "blend" or "fresh," it would have be the answer in a single round. Why? Even knowing that "blend" and "flesh" are cleary not the answer, all the letters of both words are the first characters of set of the possible answers {'bight', 'dight', 'eight', 'fight', 'hight', 'light', 'might', 'night', 'right', 'sight', 'tight', 'wight'}.
+After choosing "night," the player should have chosen a word that maximized the number of different letters. If instead of "right," the player had chosen "blend" or "fresh," it would be more close to the victory. Why? Even knowing that "blend" and "flesh" are cleary not the answer, all their letters are the first characters of set of the possible answers: {'**b**ight', '**l**ight', '**e**ight', '**n**ight', '**d**ight', '**f**ight', '**r**ight', '**s**ight', '**h**ight', 'might', 'tight', 'wight'}.
 
 This example suggests the existence of different states. Each state has different strategies based on different goals.
 
