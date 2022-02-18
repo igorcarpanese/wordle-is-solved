@@ -15,7 +15,7 @@ Once the core idea is understood, we need to explore the details of the strategy
 An initial and naive strategy would probably be a player that filters the set of possible answers using the game rules and then chooses the word with the most frequent characters. However, that strategy would inevitably make the following mistake:
 
 <div align="center">
-    <img src="meta/case1_en.png">
+    <img src="imgs/case1_en.png">
 </div>
 
 After discovering a correct position, the player insisted on winning in the next round. However, note that repeating a green character does not give additional information about the answer.
@@ -29,7 +29,7 @@ This example suggests the existence of different states. Each state has differen
 Before discussing the game states, it is necessary to describe all rules the player uses to restrict the set of possible answers.
 
 <div align="center">
-    <img src="meta/filtering_rules.png">
+    <img src="imgs/filtering_rules.png">
 </div>
 
 1. **Green character rule:** The correct word contains the green character on the position of the previous guess.
@@ -49,7 +49,7 @@ These different goals and approaches change based on the current state, set base
 ### Explore state
 
 <div align="center">
-    <img src="meta/explore_state_example.png">
+    <img src="imgs/explore_state_example.png">
 </div>
 
 In this state, the goal is to decrease the size of the set of possible answers. To achieve that, the player will choose a word that maximizes the number of unseen characters, even if that word is not the correct answer. An unseen character is a character that we do not know if it is gray, yellow, or green.
@@ -62,7 +62,7 @@ Note that the "gray character optimization" plays an essential role in this stat
 ### Find correct position state
 
 <div align="center">
-    <img src="meta/find_correct_position_state_example.png">
+    <img src="imgs/find_correct_position_state_example.png">
 </div>
 
 If the player finds a yellow character and still does not know its correct position, it should focus on finding it.
@@ -74,11 +74,10 @@ Note that the player also should maximize the number of unseen characters. To ac
 
 ### Last round state
 
-This state is achieved in the last round and differs from the previous states by ignoring the unseen characters. In this state, the player's goal is to guess a word that maximizes the chances of winning. It will do that using the absolute and relative frequencies of the words in the set of possible answers. We will see those definitions in the following section.
+This state is achieved in the last round and differs from the previous states by ignoring the unseen characters. In this state, the player's goal is to guess a word that maximizes the chances of winning. It will do that using the frequencies of the characters in the set of possible answers.
 
-**Condition trigger:** The player is at the last round. It does not matter if there are yellow characters or not.
-
-**Set of words to score:** Possible answers.
+- **Condition trigger:** The player is at the last round. It does not matter if there are yellow characters or not.
+- **Set of words to score:** Possible answers.
 
 ## Scoring
 
