@@ -1,6 +1,6 @@
 # Strategy explained
 
-The general idea of the strategy consists of:
+The strategy is a simulation that uses some optimizations to decrease the set of possible answers and some reasonable criteria to estimate the best guess for the next round. The general steps are:
 
 1. Keep a set of possible answers.
 2. Score all words of this set using a weighted average of different criteria.
@@ -8,9 +8,7 @@ The general idea of the strategy consists of:
 4. Based on game feedback, apply rules to filter the set of possible answers.
 5. Repeat these steps for each round until the end of the game.
 
-In a nutshell, the strategy is a simulation that uses some optimizations to decrease the set of possible answers and some reasonable criteria to estimate the best guess for the next round.
-
-Once the general idea is understood, we need to explore the details of the strategy. The game has different states, and the definition of the "best word to choose" changes depending on the current state. Sometimes, it will make sense to choose a word even knowing it is not the correct answer.
+Once the core idea is understood, we need to explore the details of the strategy. The game has different states, and the definition of the "best word to choose" changes depending on the current state. Sometimes, it will make sense to choose a word even knowing it is not the correct answer.
 
 ## Intuition
 
@@ -58,9 +56,8 @@ In this state, the goal is to decrease the size of the set of possible answers. 
 
 Note that the "gray character optimization" plays an essential role in this state. The player should avoid exploring a character if it does not appear on the set of possible answers.
 
-**Condition trigger:** No yellow characters to explore.
-
-**Set of words to score:** All words.
+- **Condition trigger:** No yellow characters to explore.
+- **Set of words to score:** All words.
 
 ### Find correct position state
 
@@ -72,11 +69,10 @@ If the player finds a yellow character and still does not know its correct posit
 
 Note that the player also should maximize the number of unseen characters. To achieve both goals, the player will apply the same scoring strategy of the explore state but only on words in the set of possible answers. The reason is that those words satisfy the "yellow character rule" and will surely guarantee new information about its correct position.
 
-**Condition trigger:** At least one yellow character with unknown correct position exists.
+- **Condition trigger:** At least one yellow character with unknown correct position exists.
+- **Set of words to score:** Possible answers.
 
-**Set of words to score:** Possible answers.
-
-### Try to win state
+### Last round state
 
 This state is achieved in the last round and differs from the previous states by ignoring the unseen characters. In this state, the player's goal is to guess a word that maximizes the chances of winning. It will do that using the absolute and relative frequencies of the words in the set of possible answers. We will see those definitions in the following section.
 
@@ -92,7 +88,7 @@ In our context, we will score all words in a given set and guess the one with th
 
 There are three different ways to measure if a word is good or not. Each way can provide a score with different magnitudes, so the player must normalize them to a number between 0 and 1 to allow a combination without bias.
 
-The final score is a [convex combination](https://en.wikipedia.org/wiki/Convex_combination) with arbitrary weights. The weights change depending on the state of the game. For example, in the try to win state, the weight of the number of unseen characters is zero.
+The final score is a [convex combination](https://en.wikipedia.org/wiki/Convex_combination) with arbitrary weights. The weights change depending on the state of the game. For example, in the last round state, the weight of the number of unseen characters is zero.
 
 ### Absolute frequency of each letter
 
