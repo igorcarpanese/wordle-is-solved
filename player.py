@@ -26,7 +26,7 @@ class Player():
         # Set of words of the language.
         self.initial_words: set[str] = set()
 
-        self.read_wordlist('data/DELAS_PB.dic')
+        self.read_wordlist('DELAS_PB.dic')
         self.clean_wordlist()
         self.find_absolute_frequency_letters()
         self.filter_wordlist()
@@ -37,7 +37,11 @@ class Player():
 
 
     def read_wordlist(self, filename: str) -> None:
-        with open(filename) as file:
+        from pathlib import Path
+
+        path = Path(__file__).parent / "data" / filename
+
+        with path.open() as file:
             self.initial_words = {
                 word[:word.find(',')]
                 for word
