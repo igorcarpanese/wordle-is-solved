@@ -2,7 +2,11 @@ from tqdm   import tqdm
 from player import Player
 
 def read_wordlist(filename: str) -> set[str]:
-    with open(filename) as file:
+    from pathlib import Path
+
+    path = Path(__file__).parent / "data" / filename
+
+    with path.open() as file:
         initial_words = {
             word[:word.find(',')]
             for word
@@ -81,7 +85,7 @@ def new_game(word, n_rounds):
 word_length = 5
 n_rounds    = 6
 
-words = read_wordlist('data/DELAS_PB.dic')
+words = read_wordlist('DELAS_PB.dic')
 words = clean_wordlist(words)
 words = filter_wordlist(words, word_length)
 
