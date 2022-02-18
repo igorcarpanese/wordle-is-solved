@@ -1,19 +1,19 @@
 <div align="center">
-    <img src="meta/title.png">
+    <img src="docs/imgs/title.png">
 </div>
 
 An algorithm for finding the correct word in the popular game Wordle.
 
 ## Strategy explanation
 
-The file [strategy.md](strategy.md) explains how the strategy works in detail.
+The file [docs/strategy.md](docs/strategy.md) explains how the strategy works in detail.
 
 ## Usage
 
 To play the game with assistance, just run:
 
 ```
-python game.py
+python src/game.py
 ```
 
 After each round, it will be necessary to input the play's outcome. A gray character is equivalent to 0, a yellow character is equivalent to 1, and a green character is equivalent to 2.
@@ -21,7 +21,7 @@ After each round, it will be necessary to input the play's outcome. A gray chara
 For example, the following game and commands are equivalent:
 
 <div align="center">
-    <img src="meta/how-to.png">
+    <img src="docs/imgs/how-to.png">
 </div>
 
 ```
@@ -52,7 +52,7 @@ To simulate these results, run:
 virtualenv wordle-solver
 source wordle-solver/bin/activate
 pip install tqdm==4.62.3
-python simulation.py
+python src/simulation.py
 deactivate
 ```
 
@@ -60,12 +60,13 @@ deactivate
 
 ```
 .
-├── meta                 # List of images used in documentation
-│   ├── ...
-├── data                 # List of words used to solve the game
-│   ├── DELAS_PB.dic     # List of Portuguese words
-├── player.py            # Implementation of the strategy
-├── game.py              # Used to assist a manual play
-├── simulation.py        # Used to measure the player's performance
-├── strategy.md          # The explanation of how the strategy works
+├── docs                 
+│   ├── imgs                # List of images used in documentation
+│   ├── strategy.md         # The explanation of how the strategy works
+├── src
+│   ├── data                 # List of words used to solve the game
+│   │   ├── DELAS_PB.dic     # List of Portuguese words
+│   ├── player.py            # Implementation of the strategy
+│   ├── game.py              # Used to assist a manual play
+│   ├── simulation.py        # Used to measure the player's performance
 ```
